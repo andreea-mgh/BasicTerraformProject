@@ -98,5 +98,5 @@ resource "aws_iam_role_policy_attachment" "lambda_sns_policy_attachment" {
 resource "aws_sns_topic_subscription" "sns_subscription" {
   topic_arn = aws_sns_topic.tfproject_topic.arn
   protocol  = "email"
-  endpoint  = "andreea.meghe@gmail.com"
+  endpoint  = "YOUR EMAIL HERE"
 }
