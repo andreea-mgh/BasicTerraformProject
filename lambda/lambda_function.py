@@ -19,15 +19,18 @@ def lambda_handler(event, context):
         data_nasterii = mesaj['data nasterii']
         
         if data_nasterii:
+            
             varsta = calculeaza_varsta(data_nasterii)
             print("Nume:", nume, "\nVarsta:", varsta)
+            notification = "new signup \nNume: {} \nVarsta: {}".format(nume, varsta)
+                
             try:
                 sns.publish(
                     TopicArn=os.environ['SNS_TOPIC_ARN'],
-                    Message=json.dumps({'Nume': nume, 'Varsta': varsta})
+                    Message=notification
                 )
-            except:
-                print("sns publish error")
+            except Exception as e:
+                print("SNS publish exception:", e)
             
             
         else:
@@ -35,10 +38,10 @@ def lambda_handler(event, context):
         
         return {
             'statusCode': 200,
-            'body': json.dumps('Message processed successfully')
+            'body': json.dumps('Message processed')
         }
     
-    except:
-        print("???")
+    except Exception as e:
+        print(e)
         return
         
