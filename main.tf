@@ -30,6 +30,8 @@ resource "aws_lambda_function" "tfproject_lambda" {
       SNS_TOPIC_ARN = aws_sns_topic.tfproject_topic.arn
     }
   }
+
+  source_code_hash = filebase64sha256("lambda/lambda_function.zip")
 }
 
 
